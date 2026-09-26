@@ -55,8 +55,8 @@ const users: IUser[] = [
   { id: 5, name: 'Юсуф', email: 'yusuf@mail.com', age: 35, city: 'Дербент' },
 ];
 
-const usersOver30 = users.filter(user => user.age > 30);
+const usersOver30: IUser[] = users.filter(user => user.age > 30);
 console.log('Пользователи старше 30:', usersOver30);
 
-const usersFromKhasavyurt = users.filter(user => user.city === 'Хасавюрт');
+const usersFromKhasavyurt: IUser[] = users.filter(user => user.city === 'Хасавюрт');
 console.log('Из Хасавюрта:', usersFromKhasavyurt);
