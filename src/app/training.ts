@@ -52,7 +52,7 @@ const users: IUser[] = [
   { id: 2, name: 'Мухаммад', email: 'muhammad@mail.com', age: 25, city: 'Медина' },
   { id: 3, name: 'Ахмад', email: 'ahmad@mail.com', age: 31 },
   { id: 4, name: 'Ислам', email: 'islam@mail.com', age: 28, city: 'Хасавюрт' },
-  { id: 5, name: 'Юсуф', email: 'yusuf@mail.com', age: 35, city: 'каспийск' },
+  { id: 5, name: 'Юсуф', email: 'yusuf@mail.com', age: 35, city: 'Дербент' },
 ];
 
 const usersOver30: IUser[] = users.filter(user => user.age > 30);
