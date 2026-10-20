@@ -33,10 +33,15 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
-              "src/assets/styles.scss"
+              "src/styles.scss"
             ],
             "polyfills": [
               "zone.js"
