@@ -10,6 +10,7 @@ import { Collection } from './collection';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
   companyName = 'РУМТИБЕТ';
 
   constructor() {
@@ -42,4 +43,5 @@ export class AppComponent {
     const current = Number(localStorage.getItem('visitCount') || 0);
     localStorage.setItem('visitCount', String(current + 1));
   }
+
 }
