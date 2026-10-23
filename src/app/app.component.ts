@@ -11,7 +11,7 @@ import { Collection } from './collection';
 })
 export class AppComponent {
 
-  companyName = 'РУМТИБЕТ';
+  companyName: string = 'РУМТИБЕТ';
 
   constructor() {
     console.log('Red — основной?', this.isPrimaryColor(Color.Red));
