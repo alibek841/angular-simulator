@@ -1,81 +1,168 @@
-<header class="header">
-  <div class="header__container">
-
-    <div class="header__logo">
-      <img src="images/mountain-icon.svg" alt="Лого">
-      <span>{{ companyName }}</span>
-    </div>
-
-    <nav class="header__nav">
-      <a href="#" id="nav-home">Главная</a>
-      <a href="#" id="nav-about-guide">Про гида</a>
-      <a href="#" id="nav-tour-program">Программа тура</a>
-      <a href="#" id="nav-price">Стоимость</a>
-      <a href="#" id="nav-blog">Блог</a>
-      <a href="#" id="nav-contacts">Контакты</a>
-    </nav>
-
-    <button 
-      class="header__button" 
-      type="button" 
-      id="consultation-button">
-      Консультация
-    </button>
-
+@if (isLoading) {
+  <div class="loader">
+    <div class="loader__spinner"></div>
   </div>
-</header>
+} @else {
+  <header class="header">
+    <div class="header__container">
 
-<section class="hero">
-  <div class="container hero-container">
-    <h1 class="hero-title">
-      Насладись прогулкой в горах<br>
-      с командой единомышленников
-    </h1>
-
-    <div class="tour-search">
-      <div class="tour-search-field">
-        <label class="visually-hidden" for="location-select">
-          Локация для тура
-        </label>
-        <select id="location-select">
-          <option value="">Локация для тура</option>
-        </select>
-        <span class="tour-search-hint">
-          выберите из списка
-        </span>
+      <div class="header__logo">
+        <img src="images/mountain-icon.svg" alt="Лого">
+        <span>{{ companyName }}</span>
       </div>
 
-      <div class="tour-search-field">
-        <label class="visually-hidden" for="date-input">
-          Дата похода
-        </label>
-        <input id="date-input" type="date">
-        <span class="tour-search-hint">
-          укажите дату
-        </span>
-      </div>
-
-      <div class="tour-search-field">
-        <label class="visually-hidden" for="participants-select">
-          Участники
-        </label>
-        <select id="participants-select">
-          <option value="">Участники</option>
-          <option value="4">4 человека</option>
-          <option value="5">5 человек</option>
-          <option value="6">6 человек</option>
-        </select>
-        <span class="tour-search-hint">
-          выберите из списка
-        </span>
-      </div>
+      <nav class="header__nav">
+        <a href="#" id="nav-home">Главная</a>
+        <a href="#" id="nav-about-guide">Про гида</a>
+        <a href="#" id="nav-tour-program">Программа тура</a>
+        <a href="#" id="nav-price">Стоимость</a>
+        <a href="#" id="nav-blog">Блог</a>
+        <a href="#" id="nav-contacts">Контакты</a>
+      </nav>
 
       <button 
-        class="tour-search-button" 
+        class="header__button" 
         type="button" 
-        id="search-program-button">
-        Найти программу
+        id="consultation-button">
+        Консультация
       </button>
+
+      <button 
+        class="header__toggle" 
+        type="button" 
+        (click)="toggleWidget()">
+        {{ showDate ? 'Показать счётчик' : 'Показать дату' }}
+      </button>
+
+      <div class="header__live-input">
+        <input 
+          type="text" 
+          class="live-input" 
+          placeholder="Живой инпут" 
+          [(ngModel)]="liveInputValue">
+        <span class="live-output">{{ liveInputValue }}</span>
+      </div>
+
+      @if (showDate) {
+        <div class="header__date">
+          {{ currentDate | date:'dd.MM.yyyy HH:mm:ss' }}
+        </div>
+      }
+
+      @if (!showDate) {
+        <div class="header__counter">
+          <button 
+            class="counter-btn" 
+            type="button" 
+            (click)="increment()">
+            +
+          </button>
+          <span class="counter-value">{{ clickCount }}</span>
+          <button 
+            class="counter-btn" 
+            type="button" 
+            (click)="decrement()"
+            [disabled]="clickCount === 0">
+            −
+          </button>
+        </div>
+      }
+
     </div>
-  </div>
-</section>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-container">
+      <h1 class="hero-title">
+        Насладись прогулкой в горах<br>
+        с командой единомышленников
+      </h1>
+
+      <div class="tour-search">
+        <div class="tour-search-field">
+          <label class="visually-hidden" for="location-select">
+            Локация для тура
+          </label>
+          <select id="location-select" [(ngModel)]="selectedLocation">
+            <option value="">Локация для тура</option>
+            <option value="location1">Локация 1</option>
+            <option value="location2">Локация 2</option>
+            <option value="location3">Локация 3</option>
+          </select>
+          <span class="tour-search-hint">
+            выберите из списка
+          </span>
+        </div>
+
+        <div class="tour-search-field">
+          <label class="visually-hidden" for="date-input">
+            Дата похода
+          </label>
+          <input id="date-input" type="date" [(ngModel)]="selectedDate">
+          <span class="tour-search-hint">
+            укажите дату
+          </span>
+        </div>
+
+        <div class="tour-search-field">
+          <label class="visually-hidden" for="participants-select">
+            Участники
+          </label>
+          <select id="participants-select" [(ngModel)]="selectedParticipants">
+            <option value="">Участники</option>
+            <option value="4">4 человека</option>
+            <option value="5">5 человек</option>
+            <option value="6">6 человек</option>
+          </select>
+          <span class="tour-search-hint">
+            выберите из списка
+          </span>
+        </div>
+
+        <button 
+          class="tour-search-button" 
+          type="button" 
+          id="search-program-button"
+          [disabled]="!selectedLocation || !selectedDate || !selectedParticipants">
+          Найти программу
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container features__container">
+
+      <div class="features__content">
+        <p class="features__label">наше предложение</p>
+        <h2 class="features__title">Лучшие программы для тебя</h2>
+        <p class="features__description">
+          Его корни уходят в один фрагмент классической латыни 45 года н.э.,
+          то есть более двух тысячелетий назад.
+        </p>
+
+        <div class="features__list">
+          @for (feature of features; track feature.title) {
+            <div class="feature-card">
+              <img class="feature-card__icon" [src]="feature.icon" [alt]="feature.title">
+              <div class="feature-card__text">
+                <h3 class="feature-card__title">{{ feature.title }}</h3>
+                <p class="feature-card__description">{{ feature.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+
+        <button class="features__button" type="button">Стоимость программы</button>
+      </div>
+
+      <div class="features__gallery">
+        <img src="images/lake.png" alt="Озеро" class="features__photo features__photo--1">
+        <img src="images/canyon.png" alt="Каньон" class="features__photo features__photo--2">
+        <img src="images/snowmobile.png" alt="Снегоход" class="features__photo features__photo--3">
+        <img src="images/river.png" alt="Река" class="features__photo features__photo--4">
+      </div>
+
+    </div>
+  </section>
+}
