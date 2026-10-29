@@ -30,6 +30,7 @@
       <button 
         class="header__toggle" 
         type="button" 
+        id="view-toggle-button"
         (click)="toggleWidget()">
         {{ showDate ? 'Показать счётчик' : 'Показать дату' }}
       </button>
@@ -39,6 +40,7 @@
           type="text" 
           class="live-input" 
           placeholder="Живой инпут" 
+          id="live-input"
           [(ngModel)]="liveInputValue">
         <span class="live-output">{{ liveInputValue }}</span>
       </div>
@@ -54,6 +56,7 @@
           <button 
             class="counter-btn" 
             type="button" 
+            id="counter-increment-button"
             (click)="increment()">
             +
           </button>
@@ -61,6 +64,7 @@
           <button 
             class="counter-btn" 
             type="button" 
+            id="counter-decrement-button"
             (click)="decrement()"
             [disabled]="clickCount === 0">
             −
@@ -144,7 +148,7 @@
         <div class="features__list">
           @for (feature of features; track feature.title) {
             <div class="feature-card">
-              <img class="feature-card__icon" [src]="feature.icon" [alt]="feature.title">
+              <img class="feature-card__icon" [src]="'images/' + feature.icon + '.svg'" [alt]="feature.title">
               <div class="feature-card__text">
                 <h3 class="feature-card__title">{{ feature.title }}</h3>
                 <p class="feature-card__description">{{ feature.description }}</p>
@@ -153,7 +157,7 @@
           }
         </div>
 
-        <button class="features__button" type="button">Стоимость программы</button>
+        <button class="features__button" type="button" id="program-price-button">Стоимость программы</button>
       </div>
 
       <div class="features__gallery">
