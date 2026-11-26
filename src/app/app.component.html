@@ -12,18 +12,19 @@
       </div>
 
       <nav class="header__nav">
-        <a href="#" id="nav-home">Главная</a>
-        <a href="#" id="nav-about-guide">Про гида</a>
-        <a href="#" id="nav-tour-program">Программа тура</a>
-        <a href="#" id="nav-price">Стоимость</a>
-        <a href="#" id="nav-blog">Блог</a>
-        <a href="#" id="nav-contacts">Контакты</a>
+        <a href="#" id="nav-home-link">Главная</a>
+        <a href="#" id="nav-about-guide-link">Про гида</a>
+        <a href="#" id="nav-tour-program-link">Программа тура</a>
+        <a href="#" id="nav-price-link">Стоимость</a>
+        <a href="#" id="nav-blog-link">Блог</a>
+        <a href="#" id="nav-contacts-link">Контакты</a>
       </nav>
 
       <button 
         class="header__button" 
         type="button" 
-        id="consultation-button">
+        id="consultation-button"
+        (click)="addTestMessage(MessageType.Success, 'Успешно!')">
         Консультация
       </button>
 
@@ -127,7 +128,8 @@
           class="tour-search-button" 
           type="button" 
           id="search-program-button"
-          [disabled]="!selectedLocation || !selectedDate || !selectedParticipants">
+          [disabled]="!selectedLocation || !selectedDate || !selectedParticipants"
+          (click)="addTestMessage(MessageType.Info, 'Поиск запущен')">
           Найти программу
         </button>
       </div>
@@ -147,7 +149,7 @@
 
         <div class="features__list">
           @for (feature of features; track feature.title) {
-            <div class="feature-card">
+            <div class="feature-card" [id]="'feature-' + feature.icon">
               <img class="feature-card__icon" [src]="'images/' + feature.icon + '.svg'" [alt]="feature.title">
               <div class="feature-card__text">
                 <h3 class="feature-card__title">{{ feature.title }}</h3>
@@ -157,7 +159,12 @@
           }
         </div>
 
-        <button class="features__button" type="button" id="program-price-button">Стоимость программы</button>
+        <button class="features__button" 
+          type="button"
+          id="program-price-button"
+          (click)="addTestMessage(MessageType.Warning, 'Внимание')">
+          Стоимость программы
+        </button>
       </div>
 
       <div class="features__gallery">
@@ -169,4 +176,149 @@
 
     </div>
   </section>
+
+  <section class="popular-destinations">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">ПО ВЕРСИИ ОТДЫХАЮЩИХ</p>
+        <h2 class="section-title">Популярные направления</h2>
+      </div>
+
+      <div class="destinations-grid">
+        <div class="destination-card">
+          <div class="destination-card__image-wrapper">
+            <img src="images/mountainlake.png" alt="Озеро возле гор" class="destination-card__image">
+            <div class="destination-card__rating">
+              <img src="images/star-icon.svg" alt="Рейтинг" class="rating-star">
+              <span>4.9</span>
+            </div>
+            <div class="destination-card__bottom">
+              <span class="destination-card__name">Озеро возле гор</span>
+              <span class="destination-card__price">480 &#36;</span>
+            </div>
+          </div>
+          <div class="destination-card__footer">приключение</div>
+        </div>
+
+        <div class="destination-card">
+          <div class="destination-card__image-wrapper">
+            <img src="images/mountainsatnight.png" alt="Ночь в горах" class="destination-card__image">
+            <div class="destination-card__rating">
+              <img src="images/star-icon.svg" alt="Рейтинг" class="rating-star">
+              <span>5.0</span>
+            </div>
+            <div class="destination-card__bottom">
+              <span class="destination-card__name">Ночь в горах</span>
+              <span class="destination-card__price">500 &#36;</span>
+            </div>
+          </div>
+          <div class="destination-card__footer">приключение</div>
+        </div>
+
+        <div class="destination-card">
+          <div class="destination-card__image-wrapper">
+            <img src="images/rock.png" alt="Растяжка в горах" class="destination-card__image">
+            <div class="destination-card__rating">
+              <img src="images/star-icon.svg" alt="Рейтинг" class="rating-star">
+              <span>5.0</span>
+            </div>
+            <div class="destination-card__bottom">
+              <span class="destination-card__name">Растяжка в горах</span>
+              <span class="destination-card__price">230 &#36;</span>
+            </div>
+          </div>
+          <div class="destination-card__footer">приключение</div>
+        </div>
+      </div>
+
+      <div class="section-btn-wrapper">
+        <button class="features__button" id="other-destinations-btn">Другие направления</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="travel-blog">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">ЖИЗНЬ В ПУТЕШЕСТВИЯХ</p>
+        <h2 class="section-title">Блог о путешествиях</h2>
+      </div>
+
+      <div class="blog-grid">
+        <article class="blog-card">
+          <img src="images/italycoast.png" alt="Италия" class="blog-card__image">
+          <div class="blog-card__content">
+            <h3 class="blog-card__title">Красивая Италия, какая она в реальности?</h3>
+            <p class="blog-card__desc">Для современного мира базовый вектор развития предполагает независимой разработки плановых заданий.</p>
+            <div class="blog-card__footer">
+              <span class="blog-card__date">01/04/2021</span>
+              <a href="#" class="blog-card__link" id="read-italy-article-link">читать статью</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <img src="images/sky.png" alt="Самолет" class="blog-card__image">
+          <div class="blog-card__content">
+            <h3 class="blog-card__title">Долой самолеты! Весь мир открыт для вас!</h3>
+            <p class="blog-card__desc">Для современного мира базовый вектор развития предполагает независимой разработки плановых заданий.</p>
+            <div class="blog-card__footer">
+              <span class="blog-card__date">01/04/2021</span>
+              <a href="#" class="blog-card__link" id="read-travel-world-article-link">читать статью</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <img src="images/narrowstreet.png" alt="Улица" class="blog-card__image">
+          <div class="blog-card__content">
+            <h3 class="blog-card__title">Как подготовиться к путешествию в одиночку?</h3>
+            <p class="blog-card__desc">Для современного мира базовый вектор развития предполагает независимой разработки плановых заданий.</p>
+            <div class="blog-card__footer">
+              <span class="blog-card__date">01/04/2021</span>
+              <a href="#" class="blog-card__link" id="read-solo-travel-article-link">читать статью</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <img src="images/mosque.png" alt="Индия" class="blog-card__image">
+          <div class="blog-card__content">
+            <h3 class="blog-card__title">Индия ... летим?</h3>
+            <p class="blog-card__desc">Для современного мира базовый вектор развития предполагает независимой разработки плановых заданий.</p>
+            <div class="blog-card__footer">
+              <span class="blog-card__date">01/04/2021</span>
+              <a href="#" class="blog-card__link" id="read-india-article-link">читать статью</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section-btn-wrapper">
+        <button class="features__button" id="other-materials-btn">Другие материалы</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="messages-container">
+    @for (message of messages; track message.id) {
+      <ng-container *ngTemplateOutlet="messageTpl; context: { $implicit: message }"></ng-container>
+    }
+  </div>
+
+  <ng-template #messageTpl let-message>
+    <div class="message" [ngClass]="'message--' + message.type">
+      <div class="message__icon">
+        <img src="images/star-icon.svg" alt="Иконка" class="message-icon-img"> 
+      </div>
+      <div class="message__content">
+        <div class="message__title">{{ message.title }}</div>
+        <div class="message__text">{{ message.text }}</div>
+      </div>
+      <button class="message__close" [id]="'close-message-' + message.id" (click)="closeMessage(message.id)">
+        <img src="images/close-icon.svg" alt="Закрыть" class="message__close-icon">
+      </button>
+    </div>
+  </ng-template>
+
 }
